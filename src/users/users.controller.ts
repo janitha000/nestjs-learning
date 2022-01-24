@@ -1,11 +1,13 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { UsersService } from './users.service';
 
 @Controller('users')
 export class UsersController {
+    constructor(private userService: UsersService) { }
+
     @Get()
-    findall(): User {
-        let user: User = { name: "Janitha", age: 31 };
-        return user;
+    findall(): User[] {
+        return this.userService.findAll();
     }
 
     @Get(':id')
